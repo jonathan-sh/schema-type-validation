@@ -1,0 +1,27 @@
+{
+  "name": "schema-type-validation",
+  "version": "0.0.1",
+  "description": "A simple schema type validator",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathan-sh/schema-type-validation.git"
+  },
+  "keywords": [
+    "schema",
+    "type",
+    "validation",
+    "validator",
+    "type-validator",
+    "schema-validator"
+  ],
+  "author": "jonathan-sh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathan-sh/schema-type-validation/issues"
+  },
+  "homepage": "https://github.com/jonathan-sh/schema-type-validation#readme"
+}
