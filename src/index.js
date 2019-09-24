@@ -3,7 +3,7 @@ const isObject = (it) => it && typeof it === 'object';
 
 const isArray = (it) => isObject(it) && it.length != undefined;
 
-const arrayType = (it) => 
+const getArrayType = (it) => 
 {
     try 
     {
@@ -38,7 +38,23 @@ const compare = (reference, to_check)  =>
 
         if (isObject(v1)) 
         {
-            compare(v1, v2 || {}).forEach(r =>  errors.push(r));
+            if(isArray(v1))
+            {
+                const required = getArrayType(v1).toString();
+                const informed = getArrayType(v2).toString();
+                const is_same_type = required === informed;
+                if(!is_same_type)
+                {
+                    pushError(key, required, informed, errors);
+                }
+            }
+            else
+            {
+                compare(v1, v2 || {}).forEach(it => 
+                {
+                    pushError(it.key, it.required, it.informed, errors)
+                });
+            }
         }
         else 
         {
@@ -53,4 +69,4 @@ const compare = (reference, to_check)  =>
     return errors;
 }
 
-module.exports = { pushError, isObject, compare, isArray, arrayType }
+module.exports = { pushError, isObject, compare, isArray, getArrayType }
