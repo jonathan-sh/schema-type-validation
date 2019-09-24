@@ -21,7 +21,7 @@ const compare = (reference, to_check)  =>
             {
                 pushError(key, typeof v1,typeof v2, errors);
             }
-        }
+        }   
     }
 
     return errors;
@@ -38,4 +38,4 @@ let pushError = (key, required_type, send_type, source = []) =>
     source.push(erro);
 }
 
-export default { compare }
+module.exports = { pushError, isObject, compare }

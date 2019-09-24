@@ -4,7 +4,7 @@
   "description": "A simple schema type validator",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "node_modules/jest/bin/jest.js --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/jonathan-sh/schema-type-validation/issues"
   },
-  "homepage": "https://github.com/jonathan-sh/schema-type-validation#readme"
+  "homepage": "https://github.com/jonathan-sh/schema-type-validation#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0"
+  }
 }
