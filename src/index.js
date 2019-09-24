@@ -1,6 +1,32 @@
 
 const isObject = (it) => it && typeof it === 'object';
 
+const isArray = (it) => isObject(it) && it.length != undefined;
+
+const arrayType = (it) => 
+{
+    try 
+    {
+        const set = new Set(it.map(i => typeof i));
+        return Array.from(set);
+    } 
+    catch (error) 
+    {
+        return it;
+    }
+}
+
+const pushError = (key, required_type, send_type, erros = []) =>
+{
+    let erro =
+    {
+        key: key,
+        required: required_type ,
+        informed: send_type
+    }
+    erros.push(erro);
+}
+
 const compare = (reference, to_check)  =>
 {
     let errors = [];
@@ -27,15 +53,4 @@ const compare = (reference, to_check)  =>
     return errors;
 }
 
-let pushError = (key, required_type, send_type, source = []) =>
-{
-    let erro =
-    {
-        key: key,
-        required: required_type ,
-        informed: send_type
-    }
-    source.push(erro);
-}
-
-module.exports = { pushError, isObject, compare }
+module.exports = { pushError, isObject, compare, isArray, arrayType }
