@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/jonathan-sh/schema-type-validation/tree/master.svg?style=svg)](https://circleci.com/gh/jonathan-sh/schema-type-validation/tree/master)
+
 # schema-type-validation
 
 Simple library for checking schema types by another schema with reference.
