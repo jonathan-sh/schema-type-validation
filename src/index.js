@@ -16,18 +16,20 @@ const getArrayType = (it) =>
     }
 }
 
-const pushError = (key, required_type, send_type, erros = []) =>
+const pushError = (path, required_type, send_type, erros = []) =>
 {
     let erro =
     {
-        key: key,
+        path: path,
         required: required_type ,
         informed: send_type
     }
     erros.push(erro);
 }
 
-const compare = (reference, to_check)  =>
+const getPath = (origin, key) => (origin==='') ? key : `${origin}.${key}`
+
+const compare = (reference, to_check, origin='')  =>
 {
     let errors = [];
 
@@ -35,33 +37,45 @@ const compare = (reference, to_check)  =>
     {
         let v1 = reference[key];
         let v2 = to_check[key];
-
+        let path = getPath(origin, key);
         if (isObject(v1)) 
         {
             if(isArray(v1))
             {
-                const required = getArrayType(v1).toString();
-                const informed = getArrayType(v2).toString();
-                const is_same_type = required === informed;
+                let required = getArrayType(v1)+'';
+                let informed = getArrayType(v2)+'';
+                let is_same_type = required === informed;
                 if(!is_same_type)
                 {
-                    pushError(key, required, informed, errors);
+                    let inf = isArray(v2)? `[${informed}]` : informed;
+                    let res = isObject(v1[0]) ? [v1[0]] : `[${required}]`;
+                    pushError(path, res, inf, errors);
                 }
+                else if (isArray(v2) && isObject(v2[0]))
+                {
+                    compare(v1, v2 || {}, path).forEach(it => 
+                    {
+                        pushError(it.path, it.required, it.informed, errors)
+                    });
+                } 
             }
             else
             {
-                compare(v1, v2 || {}).forEach(it => 
+                compare(v1, v2 || {}, path).forEach(it => 
                 {
-                    pushError(it.key, it.required, it.informed, errors)
+                    pushError(it.path, it.required, it.informed, errors)
                 });
+               
             }
         }
         else 
         {
-            const is_same_type = typeof v1 === typeof v2;
+            let required = typeof v1;
+            let informed = typeof v2
+            let is_same_type = required === informed;
             if(!is_same_type)
             {
-                pushError(key, typeof v1,typeof v2, errors);
+                pushError(path, required, informed, errors);
             }
         }   
     }
