@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/jonathan-sh/schema-type-validation/tree/master.svg?style=svg)](https://circleci.com/gh/jonathan-sh/schema-type-validation/tree/master)
+[![Build Status](https://travis-ci.org/jonathan-sh/schema-type-validation.svg?branch=master)](https://travis-ci.org/jonathan-sh/schema-type-validation)
 
 # schema-type-validation
 
