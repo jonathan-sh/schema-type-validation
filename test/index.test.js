@@ -45,11 +45,6 @@ test('get array type (boolean)', ()=>
     expect(getArrayType(boolean_array)).toEqual(['boolean']);
 });
 
-test('get array type (object)', ()=>
-{
-    const object_array = [ true, false ];    
-    expect(getArrayType(object_array)).toEqual(['boolean']);
-});
 
 test('compare equals objects', () =>
 {
@@ -90,7 +85,7 @@ test('compare objects check ([string] is required)', () =>
     const required = { a: '', b: 0, c: true, d : { e: [''], f: [0], g: [true] } };
     const informed = { a: '', b: 0, c: true, d : { e: [0],  f: [0], g: [true] } };
     const erros = compare(required, informed);   
-    expect(erros).toEqual([{path:'d.e', required: '[string]', informed: '[number]'}]);
+    expect(erros).toEqual([{path:'d.e', required: 'string[]', informed: 'number[]'}]);
 });
 
 test('compare objects check ([number] is required)', () =>
@@ -98,7 +93,7 @@ test('compare objects check ([number] is required)', () =>
     const required = { a: '', b: 0, c: true, d : { e: [''], f: [0] , g: [true] } };
     const informed = { a: '', b: 0, c: true, d : { e: [''], f: [''], g: [true] } };
     const erros = compare(required, informed);   
-    expect(erros).toEqual([{path:'d.f', required: '[number]', informed: '[string]'}]);
+    expect(erros).toEqual([{path:'d.f', required: 'number[]', informed: 'string[]'}]);
 });
 
 test('compare objects check ([boolean] is required)', () =>
@@ -106,7 +101,7 @@ test('compare objects check ([boolean] is required)', () =>
     const required = { a: '', b: 0, c: true, d : { e: [''], f: [0], g: [true] } };
     const informed = { a: '', b: 0, c: true, d : { e: [''], f: [0], g: [''] } };
     const erros = compare(required, informed);   
-    expect(erros).toEqual([{path:'d.g', required: '[boolean]', informed: '[string]'}]);
+    expect(erros).toEqual([{path:'d.g', required: 'boolean[]', informed: 'string[]'}]);
 });
 
 test('multiple errors', () =>
@@ -120,9 +115,9 @@ test('multiple errors', () =>
         { path: 'a', required: 'string', informed: 'number' },
         { path: 'b', required: 'number', informed: 'string' },
         { path: 'c', required: 'boolean', informed: 'string' },
-        { path: 'd.e', required: '[string]', informed: '[number]' },
-        { path: 'd.f', required: '[number]', informed: '[string]' },
-        { path: 'd.g', required: '[boolean]', informed: '[string]' } 
+        { path: 'd.e', required: 'string[]', informed: 'number[]' },
+        { path: 'd.f', required: 'number[]', informed: 'string[]' },
+        { path: 'd.g', required: 'boolean[]', informed: 'string[]' } 
     ];
 
     expect(erros).toEqual(error_list_expect);

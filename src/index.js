@@ -47,8 +47,8 @@ const compare = (reference, to_check, origin='')  =>
                 let is_same_type = required === informed;
                 if(!is_same_type)
                 {
-                    let inf = isArray(v2)? `[${informed}]` : informed;
-                    let res = isObject(v1[0]) ? [v1[0]] : `[${required}]`;
+                    let inf = isArray(v2)? `${informed}[]` : informed;
+                    let res = isObject(v1[0]) ? [v1[0]] : `${required}[]`;
                     pushError(path, res, inf, errors);
                 }
                 else if (isArray(v2) && isObject(v2[0]))
