@@ -5,14 +5,25 @@
 
 Simple library for checking schema types by another schema with reference.
 
-### getting start
+
+### install
+```js
+npm i schema-type-validation -s
+```
+
+### using
 ```js
 const { compare } = require('schema-type-validation');
-let reference = { a: '', b: 0, c: true, d : [ 0 ] };
 
+//object to reference
+const reference = { a: '', b: 0, c: true, d : [ 0 ] };
+
+//setting wrong schema
 let to_check = { a:  0, b:'', c: 'oi'};
-let erros = compare(reference, to_check);
-console.log(erros);
+
+//getting the errors
+let errors = compare(reference, to_check);
+console.log(errors);
 // [ 
 //   { path: 'a', required: 'string', informed: 'number' },
 //   { path: 'b', required: 'number', informed: 'string' },
@@ -20,9 +31,12 @@ console.log(erros);
 //   { path: 'd.e', required: 'number[]', informed: 'undefined' } 
 // ]
 
+//setting right schema
 to_check = { a: 'name', b: 42, c: false, d : [ -1 ] };
-erros = compare(reference, to_check);
-console.log(erros);
+
+//getting the errors
+errors = compare(reference, to_check);
+console.log(errors);
 // [ ]
 
 ```
