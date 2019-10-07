@@ -16,7 +16,7 @@ npm i schema-type-validation -s
 const { compare } = require('schema-type-validation');
 
 //object to reference
-const reference = { a: '', b: 0, c: true, d : [ 0 ] };
+const reference = { a: '', b: 0, c: true, d : { e: [ 0 ] } };
 
 //setting wrong schema
 let to_check = { a:  0, b:'', c: 'oi'};
@@ -32,7 +32,7 @@ console.log(errors);
 // ]
 
 //setting right schema
-to_check = { a: 'name', b: 42, c: false, d : [ -1 ] };
+to_check = { a: 'name', b: 42, c: false, d : { e: [ -1 ] } };
 
 //getting the errors
 errors = compare(reference, to_check);
